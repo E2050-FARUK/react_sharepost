@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, TextField, Grid, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFormik } from "formik";
 import firebase from "../firebase/firebase.utils";
 
 const stylesFunc = makeStyles({
@@ -10,18 +9,7 @@ const stylesFunc = makeStyles({
   },
 });
 
-function Signup() {
-  const formik = useFormik({
-    initialValues: {
-      displayName: "",
-      email: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      firebase.register(values.email, values.password);
-    },
-  });
+function Signin() {
   const signupStyles = stylesFunc();
 
   const handleGoogleButtonClick = () => {
@@ -30,26 +18,14 @@ function Signup() {
 
   return (
     <Container className={signupStyles.wrapper} maxWidth="sm">
-      <form onSubmit={formik.handleSubmit}>
+      <form>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              name="displayName"
-              label="Display Name"
-              variant="outlined"
-              fullWidth
-              value={formik.values.displayName}
-              onChange={formik.handleChange}
-            />
-          </Grid>
           <Grid item xs={12}>
             <TextField
               name="email"
               label="Email"
               variant="outlined"
               fullWidth
-              value={formik.values.email}
-              onChange={formik.handleChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -59,13 +35,11 @@ function Signup() {
               variant="outlined"
               type="password"
               fullWidth
-              value={formik.values.password}
-              onChange={formik.handleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
-              Register
+              Login
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -75,7 +49,7 @@ function Signup() {
               fullWidth
               onClick={handleGoogleButtonClick}
             >
-              SignUp with Google
+              Sign In with Google
             </Button>
           </Grid>
         </Grid>
@@ -84,4 +58,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Signin;
